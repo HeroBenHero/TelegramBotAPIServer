@@ -28,11 +28,10 @@ jobs:
 
     - name: Rename and Move files to root
       run: |
-        pwd
-        ls -al
-        mv telegram-bot-api TelegramBotAPI
-        mv TelegramBotAPI/build/telegram-bot-api ./
-        mv TelegramBotAPI/build/telegram-bot-api.zip ./
+        mv telegram-bot-api TelegramBotAPIServer
+        mv TelegramBotAPIServer/TelegramBotAPI TelegramBotAPI
+        mv TelegramBotAPIServer/build/telegram-bot-api ./
+        mv TelegramBotAPIServer/build/telegram-bot-api.zip ./
 
     - name: Commit and push
       run: |
