@@ -17,6 +17,7 @@ jobs:
 
     - name: Build
       run: |
+        rm -rf *
         git clone --recursive https://github.com/tdlib/telegram-bot-api.git
         cd telegram-bot-api
         mkdir build
@@ -27,7 +28,6 @@ jobs:
 
     - name: Rename and Move files to root
       run: |
-        rm -rf TelegramBotAPI
         mv telegram-bot-api TelegramBotAPI
         mv TelegramBotAPI/build/telegram-bot-api ./
         mv TelegramBotAPI/build/telegram-bot-api.zip ./
