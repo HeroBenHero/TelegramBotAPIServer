@@ -12,23 +12,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Install Dependencies
-    #   run: sudo apt update && sudo apt-get install zip libssl-dev zlib1g-dev g++ gperf cmake
+    - name: Install Dependencies
+      run: sudo apt update && sudo apt-get install zip libssl-dev zlib1g-dev g++ gperf cmake
 
     - name: Build
       run: |
-        rm -rf ./*
         git clone --recursive https://github.com/tdlib/telegram-bot-api.git
         cd telegram-bot-api
         mkdir build
         cd build
-        touch telegram-bot-api
-        # cmake -DCMAKE_BUILD_TYPE=Release ..
-        # cmake --build .
+        cmake -DCMAKE_BUILD_TYPE=Release ..
+        cmake --build .
         zip telegram-bot-api.zip telegram-bot-api
 
     - name: Rename and Move files to root
       run: |
+        rm -rf TelegramBotAPI
         mv telegram-bot-api TelegramBotAPI
         mv TelegramBotAPI/build/telegram-bot-api ./
         mv TelegramBotAPI/build/telegram-bot-api.zip ./
