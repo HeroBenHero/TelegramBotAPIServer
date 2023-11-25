@@ -1,6 +1,6 @@
 name: Build Telegram API Server
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   build:
@@ -29,15 +29,11 @@ jobs:
     - name: Rename and Move files to root
       run: |
         mv telegram-bot-api TelegramBotAPI
-        mv TelegramBotAPI/build/telegram-bot-api ../..
-        mv TelegramBotAPI/build/telegram-bot-api.zip ../..
-        mv TelegramBotAPI ../..
 
     - name: Commit and push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add TelegramBotAPI telegram-bot-api.zip telegram-bot-api
+        git add TelegramBotAPI TelegramBotAPI/build/telegram-bot-api TelegramBotAPI/build/telegram-bot-api.zip
         git commit -m "Update output from movieindex.py"
         git push
-
