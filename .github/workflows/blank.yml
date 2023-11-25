@@ -1,0 +1,41 @@
+name: Run script and push file
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:  
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # - name: Install Dependencies
+    #   run: sudo apt update && sudo apt-get install zip libssl-dev zlib1g-dev g++ gperf cmake
+
+    - name: Build
+      run: |
+        git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+        cd telegram-bot-api
+        mkdir build
+        cd build
+        touch telegram-bot-api
+        # cmake -DCMAKE_BUILD_TYPE=Release ..
+        # cmake --build .
+        zip telegram-bot-api.zip telegram-bot-api
+
+    - name: Move files to root
+      run: |
+        mv telegram-bot-api/build/telegram-bot-api ../..
+        mv telegram-bot-api/build/telegram-bot-api.zip ../..
+        mv telegram-bot-api ../..
+
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add telegram-bot-api telegram-bot-api.zip telegram-bot-api
+        git commit -m "Update output from movieindex.py"
+        git push
