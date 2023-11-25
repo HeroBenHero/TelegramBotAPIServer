@@ -32,12 +32,11 @@ jobs:
         mv telegram-bot-api TelegramBotAPI
         mv TelegramBotAPI/build/telegram-bot-api ./
         mv TelegramBotAPI/build/telegram-bot-api.zip ./
-        rm -rf TelegramBotAPI
         
     - name: Commit and push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add .
+        git add telegram-bot-api telegram-bot-api.zip
         git commit -m "Updated"
         git push
