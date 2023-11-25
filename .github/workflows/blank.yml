@@ -1,4 +1,4 @@
-name: Run script and push file
+name: Build Telegram API Server
 on:
   workflow_dispatch:
 
@@ -26,16 +26,17 @@ jobs:
         # cmake --build .
         zip telegram-bot-api.zip telegram-bot-api
 
-    - name: Move files to root
+    - name: Rename and Move files to root
       run: |
-        mv telegram-bot-api/build/telegram-bot-api ../..
-        mv telegram-bot-api/build/telegram-bot-api.zip ../..
-        mv telegram-bot-api ../..
+        mv telegram-bot-api TelegramBotAPI
+        mv TelegramBotAPI/build/telegram-bot-api ../..
+        mv TelegramBotAPI/build/telegram-bot-api.zip ../..
+        mv TelegramBotAPI ../..
 
     - name: Commit and push
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add telegram-bot-api telegram-bot-api.zip telegram-bot-api
+        git add telegram-bot-api telegram-bot-api.zip TelegramBotAPI
         git commit -m "Update output from movieindex.py"
         git push
