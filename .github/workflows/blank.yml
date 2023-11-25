@@ -29,6 +29,7 @@ jobs:
 
     - name: Rename and Move files to root
       run: |
+        mv telegram-bot-api TelegramBotAPI
         mv TelegramBotAPI/build/telegram-bot-api ./
         mv TelegramBotAPI/build/telegram-bot-api.zip ./
 
