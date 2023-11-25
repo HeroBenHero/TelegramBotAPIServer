@@ -37,6 +37,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add telegram-bot-api telegram-bot-api.zip TelegramBotAPI
+        git add TelegramBotAPI telegram-bot-api.zip telegram-bot-api
         git commit -m "Update output from movieindex.py"
         git push
+
